@@ -1,8 +1,8 @@
 require 'test_helper'
 
-class MongoidSessionStoreTest < ActionDispatch::IntegrationTest
+class MongoMapperSessionStoreTest < ActionDispatch::IntegrationTest
   setup do
-    ActionDispatch::Session::MongoidStore::Session.destroy_all
+    ActionDispatch::Session::MongoMapperStore::Session.destroy_all
   end
         
   test "getting nil session value" do

@@ -6,7 +6,7 @@ require "active_resource/railtie"
 require "rails/test_unit/railtie"
 
 Bundler.require
-require "mongoid_session_store"
+require "mongo_mapper_session_store"
 
 module Dummy
   class Application < Rails::Application

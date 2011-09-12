@@ -1,15 +1,13 @@
 module ActionDispatch
   module Session
-    class MongoidStore < AbstractStore
+    class MongoMapperStore < AbstractStore
 
       class Session
-        include Mongoid::Document
+        include MongoMapper::Document
+
+        key :type, String
+        key :data, String, :default => [Marshal.dump({})].pack("m*")
         
-        store_in :sessions
-
-        identity :type => String
-
-        field :data, :type => String, :default => [Marshal.dump({})].pack("m*")
       end
 
       # The class used for session storage.
@@ -39,7 +37,9 @@ module ActionDispatch
         end
 
         def find_session(id)
-          @@session_class.find_or_create_by(:id => id)
+          @@session_class.find(id) || @@session_class.new(:id => id)
+        rescue BSON::InvalidObjectId
+          @@session_class.new(:id => id)
         end
 
         # def destroy(env)
