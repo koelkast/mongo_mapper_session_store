@@ -7,9 +7,7 @@ module ActionDispatch
         
         set_collection_name 'sessions'
         
-        key :type, String
         key :data, String, :default => [Marshal.dump({})].pack("m*")
-        
       end
 
       # The class used for session storage.
