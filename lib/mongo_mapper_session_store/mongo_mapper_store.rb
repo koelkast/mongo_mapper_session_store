@@ -4,7 +4,9 @@ module ActionDispatch
 
       class Session
         include MongoMapper::Document
-
+        
+        set_collection_name 'sessions'
+        
         key :type, String
         key :data, String, :default => [Marshal.dump({})].pack("m*")
         
